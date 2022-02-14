@@ -3,12 +3,46 @@
 // and when invoked loops from the start value to the end value inclusive and for each number in that range adds to a 
 // list a value based on the following set of rules: 
 
-// 1) If the value is evenly divisible by divisor1 then add "Fizz" 
-// 2) If the value is evenly divisible by divisor2 then add "Buzz" 
+// 1) If the value is evenly divisible by divisor1 then add "Fizz" =3
+// 2) If the value is evenly divisible by divisor2 then add "Buzz" =5
+// "Bang" = 7
 // 3) If the value is evenly divisible by both divisor1 and divisor2 then add "FizzBuzz" 
 // 4) If the value is not evenly divisible by either divisor then add the value itself. 
 
 
+
+// List<string> result = FizzBuzz(10, 15, 3, 5);
+// foreach(string item in result)
+// {
+//     Console.WriteLine(item);
+// }
+List<string> FizzBuzz(int start, int end, int d1, int d2)
+{
+    List<string> Out = new List<string>();
+
+    for( int i = start; i<= end; i++)
+    {
+        string sub = "";
+        if((i%d1==0)||(i%d2==0))
+        {
+            if (i%d1==0)
+            {
+                sub += "Fizz";
+            }
+            if (i%d2==0)
+            {
+                sub += "Buzz";
+            }
+        }
+        else
+        {
+            sub += $"{i}";
+        }
+
+        Out.Add(sub);
+    }
+    return Out;
+}
 
 // Exercise 2 – Word Count 
 // Complete the function below so that it will take a string of text as input and return an object the keys of which 
@@ -29,6 +63,55 @@
 //the characters from each. 
 
 //If you invoke this function: 
-//IsValidShuffle("abc", "def", "dabecf") the expected response is true 
+//IsValidShuffle("abc", "def", "dabecf") the expected response is true ------ dabfec
 //If you invoke this function: 
 //IsValidShuffle("abc", "def", "bdacef") the expected response is false 
+
+
+
+
+//Console.WriteLine(IsValidShuffle("abchi", "defg", "dabecfgih"));
+bool IsValidShuffle(string str1, string str2, string str3)
+{
+    bool test = true;
+
+    foreach( char letter in str3)
+    {
+        if(str1 == "")
+        {
+            if(letter == str2[0])
+            {
+                str2 = str2.Remove(0, 1);
+            }
+            else
+            {
+                test = false;
+            }           
+        }
+        else if(str2 == "")
+        {
+            if(letter == str1[0])
+            {
+                str1 = str1.Remove(0, 1);
+            }
+            else
+            {
+                test = false;
+            }           
+        }
+        else if(letter == str1[0])
+            {
+                str1 = str1.Remove(0, 1);
+            }
+        else if(letter == str2[0])
+        {
+            str2 = str2.Remove(0, 1);
+        }
+        else
+        {
+            test = false;
+        }
+    }
+
+    return test;
+}
